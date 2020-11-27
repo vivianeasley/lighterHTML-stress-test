@@ -1,0 +1,56 @@
+@import '_reset.scss';
+
+$var: white;
+
+body {
+  background-color: $var;
+}
+
+main {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 38px;
+  border-bottom: 1px solid grey;
+  padding: 8px 4px;
+  background-color: white;
+}
+
+.intro {
+  white-space: normal;
+}
+
+.header-spacer {
+  height: 38px;
+  margin-bottom: 10px;
+}
+
+.row {
+  height: 20px;
+}
+
+.tile {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.plains {
+  background-color: rgb(255, 193, 7);
+}
+.mountains {
+  background-color: rgb(165, 61, 0);
+}
+.forests {
+  background-color: rgb(0, 128, 0);
+}
+.water {
+  background-color: rgb(0, 53, 158);
+}
