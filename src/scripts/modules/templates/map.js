@@ -2,6 +2,7 @@ import { html, svg } from 'lighterhtml';
 
 export const rows = function rows (state) {
     const { worldData, character } = state;
+    const { map } = character;
 
     const colors = {
         plains: [189, 131, 0],
@@ -24,7 +25,7 @@ export const rows = function rows (state) {
     }
     return html`
         ${
-            worldData.map((rowData, i) => html`
+            worldData[map].map((rowData, i) => html`
                 <div class="row" data-i=${i}>
                     ${
                         rowData.map((tileData, j) => html`

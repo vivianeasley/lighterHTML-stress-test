@@ -3,6 +3,7 @@ import { noisesOff } from "../noise";
 import { updateStatePromise } from "../state/sm";
 
 export const character = {
+    map: 0,
     renown: 0,
     currentDay: 1, // day 10 hook/quest/etc.
     posX: 3,
@@ -32,8 +33,8 @@ export async function getWorldData (charState) {
     return worldArr;
 }
 
-export async function updateWorldData (state) {
-    const updatedWorld = [];
+export async function createWorldData () {
+    const wholeNewWorld = [];
     const seed1 = Math.random();
     const seed2 = Math.random();
 
@@ -41,15 +42,26 @@ export async function updateWorldData (state) {
     const rng2 = noisesOff(seed2);
 
     for (let i = 0; i < 100; i++) {
-        updatedWorld[i] = [];
+        wholeNewWorld[i] = [];
         for (let j = 0; j < 100; j++) {
-            const elevation = await getElevationPromise(j,i, rng1, rng2, updatedWorld);
+            const elevation = await getElevationPromise(j,i, rng1, rng2, wholeNewWorld);
             const tile = getTile(elevation);
-            updatedWorld[i][j] = tile;
+            wholeNewWorld[i][j] = tile;
         }
     }
 
+    return wholeNewWorld;
+
+}
+
+export async function updateWorldData () {
     await updateStatePromise((state)=>{
-        state.worldData = updatedWorld;
+        let value = state.character.map;
+        if (value === 9) {
+            value = 0;
+        } else {
+            value++;
+        }
+        state.character.map = value;
     });
 }
